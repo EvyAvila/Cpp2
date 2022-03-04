@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include <iostream>
@@ -5,23 +6,27 @@
 #include <string>
 #include <random>
 #include <chrono>
+#include <functional>
+#include <map>
+#include <algorithm>
+#include <ostream>
 
-enum RoundResult {Win, Lose};
-enum Suits {Heart, Diamond, Spade, Club};
-enum Name {Ace, Jack, Queen, King};
+enum TheTeam {Team1, Team2};
+enum Suits {Heart, Diamond, Spade, Club, empty};
+enum Names {Jack, Ace, Queen, King};
 
 struct TheCard;
 struct TheDeck;
 
-class ThePlayers;
-
-class ComparingAnswerKey;
+class ThePlayer;
+class GetTrumpCard;
 
 int Team1Points;
 int Team2Points;
 
-bool Changevalue(ThePlayers *tp);
+bool Changevalue(ThePlayer *tp);
 
-RoundResult TheRouldResult();
+TheTeam team();
 
-std::string FinalRoundResult(RoundResult rr);
+std::string FinalRoundResult(TheTeam rr);
+

@@ -1,4 +1,6 @@
 #include "header.h"
+#include <string>
+#include <iostream>
 
 struct TheCard
 {
@@ -97,18 +99,6 @@ class ThePlayer
         }
 };
 
-//Might not need it
-bool Changevalue(ThePlayer *tp)
-{
-    for(int i = 9; i <= 14; i++)
-    {
-        if(tp->playerHand[i].Name == Jack)
-        {
-            tp->playerHand[i].CardValue += 14;
-        }
-    }
-}
-
 class GetTrumpCard
 {
     public:
@@ -121,153 +111,133 @@ class GetTrumpCard
         }
 };
 
-TheTeam team()
+
+std::string EachRoundResult()
 {
     TheDeck td = TheDeck();
     td.ShuffleTheDeck();
-
-    //Team 1
-    ThePlayer *player1 = new ThePlayer();
-    ThePlayer *player2 = new ThePlayer();
-
-    //Team 2
-    ThePlayer *player3 = new ThePlayer();
-    ThePlayer *player4 = new ThePlayer();
+   
+    
+    ThePlayer *Maker1 = new ThePlayer();
+    ThePlayer *Maker2 = new ThePlayer();
+    ThePlayer *Defender1 = new ThePlayer();
+    ThePlayer *Defender2 = new ThePlayer();
 
     GetTrumpCard gtc = GetTrumpCard();
     gtc.TrumpCard;
 
-        while(player1->LookAtHand() < 6)
-        {
-            player1->playerHand.push_back(td.DealingCard());
-
-            //if(player1->LookAtHand() < 6 )
-            //{
-                //player1->playerHand.push_back(td.DealingCard());
-
-                if(player1->LookAtHand() == 14 && gtc.TrumpCard == Heart)
-                {
-                    //return Team2;
-                    Team1Points++;
-                    //break;
-                }
-                else if(player1->LookAtHand() == 14 && gtc.TrumpCard == Diamond)
-                {
-                    Team1Points++;
-                    //break;
-                }
-                else if(player1->LookAtHand() == 14 && gtc.TrumpCard == Spade)
-                {
-                    Team1Points++;
-                    //break;
-                }
-                else if(player1->LookAtHand() == 14 && gtc.TrumpCard == Club)
-                {
-                    Team1Points++;
-                }
-                else if(player1->LookAtHand() == 0)
-                {
-                    break;
-                }                
-                else
-                {
-                   // 
-                }
-            //}
-        }
-
-        while(player3->LookAtHand() < 6)
-        {
-            player3->playerHand.push_back(td.DealingCard());
-
-            //if(player1->LookAtHand() < 6 )
-            //{
-                //player1->playerHand.push_back(td.DealingCard());
-
-                if(player3->LookAtHand() == 14 && gtc.TrumpCard == Heart)
-                {
-                    //return Team2;
-                    Team2Points++;
-                    //break;
-                }
-                else if(player3->LookAtHand() == 14 && gtc.TrumpCard == Diamond)
-                {
-                    Team2Points++;
-                    //break;
-                }
-                else if(player3->LookAtHand() == 14 && gtc.TrumpCard == Spade)
-                {
-                    Team2Points++;
-                    //break;
-                }
-                else if(player3->LookAtHand() == 14 && gtc.TrumpCard == Club)
-                {
-                    Team2Points++;
-                }
-                else if(player3->LookAtHand() == 0)
-                {
-                    break;
-                }                
-                else
-                {
-                   // 
-                }
-                
-            //}
-        
-        }
-
-
-        if(Team1Points > Team2Points)
-        {
-            return Team1;
-        }
-        else if(Team2Points > Team1Points)
-        {
-            return Team2;
-        }
-        return Team2;
-}
-
-std::string FinalRoundResult(TheTeam rr)
-{
-    if(rr == Team1)
+    for(int i = 0; i < 6; i++)
     {
-        return std::move("Team 1 wins the round");
-    }
-    else if(rr == Team2)
-    {
-        return std::move("Team 2 winds the round");
+        Maker1->playerHand.push_back(td.DealingCard());
+        Defender1->playerHand.push_back(td.DealingCard());
+        Maker2->playerHand.push_back(td.DealingCard());
+        Defender2->playerHand.push_back(td.DealingCard());
     }
 
-    return std::move("");
+    for(int i = 0; i < Maker1->LookAtHand(); i++)
+    {
+        if(Maker1->playerHand[i].Name == Names(Jack) && Maker1->playerHand[i].Suit == gtc.TrumpCard)
+        {
+            Team1Points += 5;
+        }
+        else if(Maker1->playerHand[i].Name == Names(Jack) && Maker1->playerHand[i].Suit != gtc.TrumpCard)
+        {
+            Team1Points += 3;
+        }
+        else if(Maker1->playerHand[i].CardValue < 14 && Maker1->playerHand[i].Suit == gtc.TrumpCard)
+        {
+            Team1Points += 1;
+        }
+        else if(Maker1->playerHand[i].CardValue < 14 && Maker1->playerHand[i].Suit != gtc.TrumpCard)
+        {
+            Team1Points += 0.05;
+        }
+    }
+
+    for(int i = 0; i < Defender1->LookAtHand(); i++)
+    {
+        if(Defender1->playerHand[i].Name == Names(Jack) && Defender1->playerHand[i].Suit == gtc.TrumpCard)
+        {
+            Team2Points += 5;
+        }
+        else if(Defender1->playerHand[i].Name == Names(Jack) && Defender1->playerHand[i].Suit != gtc.TrumpCard)
+        {
+            Team2Points += 3;
+        }
+        else if(Defender1->playerHand[i].CardValue < 14 && Defender1->playerHand[i].Suit == gtc.TrumpCard)
+        {
+            Team2Points += 1;
+        }
+        else if(Defender1->playerHand[i].CardValue < 14 && Defender1->playerHand[i].Suit == gtc.TrumpCard)
+        {
+            Team2Points += 0.05;
+        }
+    }
+
+    for (int i = 0; i < Maker2->LookAtHand(); i++)
+    {
+        if (Maker2->playerHand[i].Name == Names(Jack) && Maker2->playerHand[i].Suit == gtc.TrumpCard)
+        {
+            Team1Points += 5;
+        }
+        else if (Maker2->playerHand[i].Name == Names(Jack) && Maker2->playerHand[i].Suit != gtc.TrumpCard)
+        {
+            Team1Points += 3;
+        }
+        else if (Maker2->playerHand[i].CardValue < 14 && Maker2->playerHand[i].Suit == gtc.TrumpCard)
+        {
+            Team1Points += 1;
+        }
+        else if (Maker2->playerHand[i].CardValue < 14 && Maker2->playerHand[i].Suit != gtc.TrumpCard)
+        {
+            Team1Points += 0.5;
+        }
+
+    }
+
+    for(int i = 0; i <Defender1->LookAtHand(); i++)
+    {
+        if (Defender2->playerHand[i].Name == Names(Jack) && Defender2->playerHand[i].Suit == gtc.TrumpCard)
+        {
+            Team2Points += 5;
+        }
+        if (Defender2->playerHand[i].Name == Names(Jack) && Defender2->playerHand[i].Suit != gtc.TrumpCard)
+        {
+            Team2Points += 3;
+        }
+        else if (Defender2->playerHand[i].CardValue < 14 && Defender2->playerHand[i].Suit == gtc.TrumpCard)
+        {
+            Team2Points += 1;
+        }
+        else if (Defender2->playerHand[i].CardValue < 14 && Defender2->playerHand[i].Suit != gtc.TrumpCard)
+        {
+            Team2Points += 0.5;
+        }
+
+    }
+
+    if(Team1Points > Team2Points)
+    {
+        return std::string("Maker win round");
+    }
+    else if(Team2Points > Team1Points)
+    {
+        return std::string("Defender win round");
+    }
+    else
+    {
+        return std::string("No winner");
+    }
+
+
+    return std::string("");
 }
 
 
 int main()
 {
-    //std::cout << "Hello Testing" << std::endl;
-    //for(int i = 0; i < 100; i++)
-    //{
-        //Can display specifc input
-        //std::cout << TheCard(14, Heart, Jack).Name << std::endl;
-        
-        //Can display the card by calling each specific part
-        //std::cout << TheDeck().TheCardDeck[5].CardValue << std::endl;
-        //std::cout << TheDeck().TheCardDeck[5].Name << std::endl;
-        //std::cout << TheDeck().TheCardDeck[5].Suit << std::endl;
-        
-        //can check size
-        //std::cout << TheDeck().TheCardDeck[i].CardValue << std::endl;
-        //std::cout << TheDeck().TheCardDeck.size() << std::endl;
-
-        //Empty
-        //std::cout << player1->LookAtHand() << std::endl;
-        //std::cout << "Player 1 has the value of: " << std::endl;
-        //std::cout<< player1->LookAtHand() << std::endl;
-    //}
-
-    std::cout << FinalRoundResult(TheTeam()) << std::endl;
-    
-
+    for(int i = 0; i < 100; i++)
+    {
+        std::cout << EachRoundResult() << std::endl;
+    }
 }

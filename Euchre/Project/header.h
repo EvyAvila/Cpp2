@@ -10,8 +10,8 @@
 #include <map>
 #include <algorithm>
 #include <ostream>
+#include <utility>
 
-enum TheTeam {Team1, Team2};
 enum Suits {Heart, Diamond, Spade, Club, empty};
 enum Names {Jack, Ace, Queen, King};
 
@@ -21,12 +21,8 @@ struct TheDeck;
 class ThePlayer;
 class GetTrumpCard;
 
-int Team1Points;
-int Team2Points;
+double Team1Points;
+double Team2Points;
 
-bool Changevalue(ThePlayer *tp);
 
-TheTeam team();
-
-std::string FinalRoundResult(TheTeam rr);
-
+std::string EachRoundResult();

@@ -1,0 +1,1 @@
+/usr/bin/c++   -std=c++11    CMakeFiles/app.dir/main.cpp.o CMakeFiles/app.dir/Parser.cpp.o  -o app -rdynamic 

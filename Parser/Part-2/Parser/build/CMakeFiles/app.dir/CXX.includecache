@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../includes/parser.h
+iostream
+-
+string
+-
+vector
+-
+algorithm
+-
+set
+-
+
+/home/cuser/Evy/Cpp2/Parser/Parser.cpp
+parser.h
+/home/cuser/Evy/Cpp2/Parser/parser.h
+iostream
+-
+string
+-
+vector
+-
+algorithm
+-
+set
+-
+
+/home/cuser/Evy/Cpp2/Parser/main.cpp
+iostream
+-
+string
+-
+vector
+-
+parser.h
+/home/cuser/Evy/Cpp2/Parser/parser.h
+
